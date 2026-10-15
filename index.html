@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Bulking Coach | 53kg ➔ 65kg</title>
+  
+  <!-- Apple & PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BulkCoach">
+  <meta name="theme-color" content="#0a0e17">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/manifest.json">
+
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="app" class="app-container">
+    
+    <!-- TOP APP BAR -->
+    <header class="top-nav">
+      <div class="user-info">
+        <div class="avatar-ring">
+          <span class="avatar-initials">P</span>
+          <span class="active-dot"></span>
+        </div>
+        <div class="user-meta">
+          <div class="user-name-row">
+            <span class="user-name">Prateek</span>
+            <span class="phase-tag">Day 1 • Veg Mode</span>
+          </div>
+          <div class="target-sub">53 kg &rarr; <strong class="glow-text">65 kg Target</strong></div>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <div id="anabolic-timer-badge" class="anabolic-badge" title="Time since last meal">
+          <span class="badge-icon">⏳</span>
+          <span id="gap-time-text">1.2h ago</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN SCROLLABLE CONTENT -->
+    <main class="main-content">
+      
+      <!-- ============================================== -->
+      <!-- TAB 1: DASHBOARD HUD -->
+      <!-- ============================================== -->
+      <section id="tab-dashboard" class="tab-pane active">
+        
+        <!-- MOTIVATION / STATUS BANNER -->
+        <div class="status-banner">
+          <div class="banner-content">
+            <div class="banner-title">⚡ Day 1 Bulking Rebound</div>
+            <div class="banner-desc">Full Body Priming done! Ab bacha hua fuel body me daalna hai.</div>
+          </div>
+          <button id="btn-rescue" class="btn-rescue-pill" onclick="openRescueModal()">
+            <span>🚨 Rescue</span>
+          </button>
+        </div>
+
+        <!-- MAIN CALORIE HUD CARD -->
+        <div class="hud-card glass-panel">
+          <div class="hud-header">
+            <div>
+              <span class="hud-label">DAILY CALORIE FUEL</span>
+              <div class="hud-val-row">
+                <span id="hud-cal-consumed" class="big-num">830</span>
+                <span class="target-denom">/ <span id="hud-cal-target">2,600</span> kcal</span>
+              </div>
+            </div>
+            <div class="pending-chip">
+              <span class="pending-label">PENDING</span>
+              <span id="hud-cal-pending" class="pending-num">1,770 kcal</span>
+            </div>
+          </div>
+
+          <!-- DUAL PROGRESS BAR -->
+          <div class="progress-track">
+            <div id="cal-progress-bar" class="progress-fill cal-gradient" style="width: 32%;"></div>
+          </div>
+
+          <!-- MACRO TILES -->
+          <div class="macro-grid">
+            <div class="macro-box">
+              <div class="macro-head">
+                <span class="macro-dot dot-protein"></span>
+                <span class="macro-name">PROTEIN</span>
+              </div>
+              <div class="macro-val"><span id="hud-p-val">27</span>g <small>/ 125g</small></div>
+              <div class="mini-track"><div id="p-bar" class="mini-fill fill-protein" style="width: 22%;"></div></div>
+              <span id="p-pending" class="sub-pending">98g left</span>
+            </div>
+
+            <div class="macro-box">
+              <div class="macro-head">
+                <span class="macro-dot dot-carbs"></span>
+                <span class="macro-name">CARBS</span>
+              </div>
+              <div class="macro-val"><span id="hud-c-val">130</span>g <small>/ 365g</small></div>
+              <div class="mini-track"><div id="c-bar" class="mini-fill fill-carbs" style="width: 35%;"></div></div>
+              <span id="c-pending" class="sub-pending">235g left</span>
+            </div>
+
+            <div class="macro-box">
+              <div class="macro-head">
+                <span class="macro-dot dot-fats"></span>
+                <span class="macro-name">FATS</span>
+              </div>
+              <div class="macro-val"><span id="hud-f-val">23</span>g <small>/ 58g</small></div>
+              <div class="mini-track"><div id="f-bar" class="mini-fill fill-fats" style="width: 40%;"></div></div>
+              <span id="f-pending" class="sub-pending">35g left</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- WATER INTAKE TRACKER -->
+        <div class="water-card glass-panel">
+          <div class="water-header">
+            <div class="water-title-group">
+              <span class="water-icon">💧</span>
+              <div>
+                <span class="card-title">Hydration & Cell Volume</span>
+                <div class="water-stats">
+                  <strong id="water-consumed">1,250</strong> / <span id="water-target">3,500</span> ml
+                  <span id="water-pending-badge" class="water-left-badge">(2,250 ml left)</span>
+                </div>
+              </div>
+            </div>
+            <div class="water-buttons">
+              <button class="btn-water" onclick="addWater(250)">+250ml</button>
+              <button class="btn-water btn-water-lg" onclick="addWater(500)">+500ml</button>
+            </div>
+          </div>
+          <div class="progress-track water-track">
+            <div id="water-bar" class="progress-fill water-gradient" style="width: 36%;"></div>
+          </div>
+        </div>
+
+        <!-- SUPPLEMENTS STREAK -->
+        <div class="supplements-card glass-panel">
+          <div class="card-header-row">
+            <span class="card-title">Daily Bulking Supplements</span>
+            <span class="streak-badge">⚡ Streak: Active</span>
+          </div>
+          <div class="supp-grid">
+            <button class="supp-item" id="supp-creatine" onclick="toggleSupp('creatine')">
+              <span class="supp-check">✓</span>
+              <span class="supp-text">Creatine 5g</span>
+            </button>
+            <button class="supp-item" id="supp-whey" onclick="toggleSupp('whey')">
+              <span class="supp-check">✓</span>
+              <span class="supp-text">Whey Scoop</span>
+            </button>
+            <button class="supp-item" id="supp-multivitamin" onclick="toggleSupp('multivitamin')">
+              <span class="supp-check">✓</span>
+              <span class="supp-text">Multivitamin</span>
+            </button>
+            <button class="supp-item" id="supp-omega3_d3" onclick="toggleSupp('omega3_d3')">
+              <span class="supp-check">✓</span>
+              <span class="supp-text">Omega 3 / D3</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- TODAY'S MEALS FEED -->
+        <div class="meals-summary-section">
+          <div class="section-title-row">
+            <span class="section-title">Today's Fuel Log</span>
+            <button class="btn-text" onclick="switchTab('scanner')">+ Log Food</button>
+          </div>
+          <div id="today-meals-list" class="meals-list">
+            <!-- Dynamically Rendered -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- TAB 2: AI FOOD SCANNER & QUICK LOGGER -->
+      <!-- ============================================== -->
+      <section id="tab-scanner" class="tab-pane">
+        <div class="pane-header">
+          <h2>📸 AI Food Scanner & Logger</h2>
+          <p>Photo khicho ya food ka naam likho &mdash; AI macros extract karega!</p>
+        </div>
+
+        <!-- CAMERA / PHOTO UPLOAD BOX -->
+        <div class="scanner-card glass-panel">
+          <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;" onchange="handleImageSelected(event)">
+          <input type="file" id="gallery-input" accept="image/*" style="display: none;" onchange="handleImageSelected(event)">
+
+          <div id="camera-dropzone" class="camera-dropzone" onclick="document.getElementById('gallery-input').click()">
+            <div id="preview-container" class="preview-container" style="display: none;">
+              <img id="food-preview-img" src="" alt="Food Preview">
+              <button class="btn-remove-photo" onclick="removeSelectedImage(event)">&times;</button>
+            </div>
+            <div id="dropzone-prompt" class="dropzone-prompt">
+              <div class="cam-icon-glow">📷</div>
+              <strong>Tap to Upload or Take Plate Photo</strong>
+              <small>Palak paneer, thali, shake, eggs, rice etc.</small>
+            </div>
+          </div>
+
+          <!-- TEXT INPUT OVERRIDE / PROMPT -->
+          <div class="scan-input-group">
+            <input type="text" id="food-text-input" placeholder="Ya yahan likho: e.g. 150g paneer + 2 katori chawal + dahi" class="dark-input">
+            <button id="btn-analyze" class="btn-primary" onclick="analyzeFood()">
+              <span id="analyze-btn-text">Extract Macros ⚡</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- EXTRACTED MACROS PREVIEW MODAL / CARD -->
+        <div id="extracted-card" class="extracted-card glass-panel" style="display: none;">
+          <div class="extracted-header">
+            <div>
+              <span class="chip-detected">DETECTED</span>
+              <h3 id="ext-dish-name">Palak Paneer + White Rice</h3>
+            </div>
+            <span id="ext-calories" class="ext-cal-badge">620 kcal</span>
+          </div>
+          
+          <div class="macro-pill-row">
+            <span class="macro-pill pill-p">Protein: <strong id="ext-p">24g</strong></span>
+            <span class="macro-pill pill-c">Carbs: <strong id="ext-c">78g</strong></span>
+            <span class="macro-pill pill-f">Fats: <strong id="ext-f">22g</strong></span>
+          </div>
+
+          <p id="ext-note" class="ext-note">Component breakdown matches Indian recipe database.</p>
+
+          <div class="modal-actions">
+            <button class="btn-secondary" onclick="cancelExtracted()">Cancel</button>
+            <button class="btn-primary" onclick="confirmAddExtracted()">Add to Dashboard ✓</button>
+          </div>
+        </div>
+
+        <!-- INSTANT 1-TAP INDIAN FOOD SHORTCUTS -->
+        <div class="quick-shortcuts-section">
+          <span class="section-title">⚡ 1-Tap Desi Bulking Shortcuts</span>
+          <div class="shortcuts-grid">
+            <button class="shortcut-btn" onclick="quickAdd('Palak Paneer (150g) + Rice (1.5 bowl)', 620, 24, 78, 22)">
+              <span class="sc-icon">🍲</span>
+              <div class="sc-info">
+                <strong>Palak Paneer + Rice</strong>
+                <small>620 kcal • 24g P</small>
+              </div>
+            </button>
+
+            <button class="shortcut-btn" onclick="quickAdd('Bulking High-Cal Shake (Milk + Oats + PB + Banana)', 680, 26, 85, 26)">
+              <span class="sc-icon">🥤</span>
+              <div class="sc-info">
+                <strong>Mega Bulking Shake</strong>
+                <small>680 kcal • 26g P</small>
+              </div>
+            </button>
+
+            <button class="shortcut-btn" onclick="quickAdd('1 Scoop Whey Protein in Water', 125, 25, 2, 1)">
+              <span class="sc-icon">🥛</span>
+              <div class="sc-info">
+                <strong>Whey Scoop (1x)</strong>
+                <small>125 kcal • 25g P</small>
+              </div>
+            </button>
+
+            <button class="shortcut-btn" onclick="quickAdd('2 Bananas + Peanut Butter (2 tbsp)', 390, 9, 60, 16)">
+              <span class="sc-icon">🍌</span>
+              <div class="sc-info">
+                <strong>2 Bananas + PB</strong>
+                <small>390 kcal • 9g P</small>
+              </div>
+            </button>
+
+            <button class="shortcut-btn" onclick="quickAdd('Thick Dal (1.5 bowl) + 3 Roti + Dahi', 510, 22, 82, 10)">
+              <span class="sc-icon">🫓</span>
+              <div class="sc-info">
+                <strong>Dal + 3 Roti + Dahi</strong>
+                <small>510 kcal • 22g P</small>
+              </div>
+            </button>
+
+            <button class="shortcut-btn" onclick="quickAdd('Soya Chunks Curry (50g) + Rice', 420, 30, 60, 4)">
+              <span class="sc-icon">🌱</span>
+              <div class="sc-info">
+                <strong>Soya Chunks + Rice</strong>
+                <small>420 kcal • 30g P</small>
+              </div>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- TAB 3: DIET HACKS & REVERSE PORTIONS -->
+      <!-- ============================================== -->
+      <section id="tab-diet" class="tab-pane">
+        <div class="pane-header">
+          <h2>🍲 Desi Bulking Nutrition Engine</h2>
+          <p>Ghar ka khana, density hacks aur digestion shield</p>
+        </div>
+
+        <!-- REVERSE PORTION CALCULATOR -->
+        <div class="portion-calc-card glass-panel">
+          <div class="card-header-row">
+            <span class="card-title">"Ghar Pe Kya Bana Hai?" Calculator</span>
+            <span class="chip-smart">PORTION GUIDE</span>
+          </div>
+          <p class="card-sub">Select what's cooked at home &mdash; app tells exact katoris to hit target:</p>
+
+          <select id="dish-select" class="dark-input" onchange="calculatePortion()">
+            <option value="palak_paneer">Palak Paneer with Rice</option>
+            <option value="rajma_chawal">Rajma Chawal</option>
+            <option value="dal_roti">Thick Dal + Roti</option>
+            <option value="chhole_bhature_roti">Chhole with Roti/Rice</option>
+            <option value="paneer_bhurji">Paneer Bhurji with Roti</option>
+            <option value="soya_curry">Soya Chunks Sabzi with Rice</option>
+            <option value="aloo_paratha">Aloo / Gobi Paratha with Dahi</option>
+          </select>
+
+          <div id="portion-recommendation-box" class="portion-box">
+            <!-- Dynamically Updated -->
+          </div>
+        </div>
+
+        <!-- CALORIE DENSITY CHEAT-SHEET -->
+        <div class="density-card glass-panel">
+          <div class="card-header-row">
+            <span class="card-title">⚡ Calorie Density Hacks (+500 kcal)</span>
+            <span class="badge-mini">Bina Pet Bhare</span>
+          </div>
+          
+          <div class="density-list">
+            <div class="density-item">
+              <span class="d-icon">🧈</span>
+              <div class="d-info">
+                <strong>1 Tbsp Desi Ghee on Roti / Rice</strong>
+                <small>+120 kcal • Zero extra volume • Lubricates joints</small>
+              </div>
+              <span class="d-tag">+120</span>
+            </div>
+
+            <div class="density-item">
+              <span class="d-icon">🥜</span>
+              <div class="d-info">
+                <strong>2 Tbsp Peanut Butter in Shakes</strong>
+                <small>+190 kcal • 8g Protein • Smooth liquid calories</small>
+              </div>
+              <span class="d-tag">+190</span>
+            </div>
+
+            <div class="density-item">
+              <span class="d-icon">🌰</span>
+              <div class="d-info">
+                <strong>Handful Roasted Chana + Almonds</strong>
+                <small>+180 kcal • Pocket snack while working/studying</small>
+              </div>
+              <span class="d-tag">+180</span>
+            </div>
+
+            <div class="density-item">
+              <span class="d-icon">🥛</span>
+              <div class="d-info">
+                <strong>Full Cream Doodh Swap (Amul Gold)</strong>
+                <small>+80 extra kcal per glass over toned milk</small>
+              </div>
+              <span class="d-tag">+80</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BAHAR KHANE KA GUIDE (SWIGGY/ZOMATO/RESTAURANT) -->
+        <div class="dining-out-card glass-panel">
+          <div class="card-header-row">
+            <span class="card-title">🛵 Bahar / Canteen Me Kya Order Karein?</span>
+          </div>
+          
+          <div class="dining-tabs">
+            <div class="dining-group">
+              <strong class="dining-label green-label">🟢 VEG DAYS (Agle 7 Din):</strong>
+              <ul class="dining-list">
+                <li><strong>Paneer Tikka + 2 Tandoori Roti + Dal Tadka:</strong> ~35g Protein, ~680 kcal (Cleanest bulk).</li>
+                <li><strong>Soya Chaap (Tandoori/Gravy, Not Deep Fried) + Rumali/Roti:</strong> ~30g Protein, ~550 kcal.</li>
+                <li><strong>Rajma / Chhole + Steamed Rice + Extra Dahi:</strong> ~25g Protein, ~650 kcal.</li>
+              </ul>
+            </div>
+
+            <div class="dining-group">
+              <strong class="dining-label orange-label">🍗 DAY 10 ONWARDS (Non-Veg):</strong>
+              <ul class="dining-list">
+                <li><strong>Half Tandoori Chicken + 2 Roti + Salad:</strong> ~55g Protein, ~580 kcal (Elite Bollywood lean mass).</li>
+                <li><strong>Chicken Curry (Light Oil) + Jeera Rice:</strong> ~40g Protein, ~650 kcal.</li>
+                <li><strong>4 Boiled Eggs Bhurji / Omelette + Toast:</strong> ~26g Protein, ~480 kcal.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- GUT & DIGESTION SHIELD -->
+        <div class="gut-shield-card glass-panel">
+          <div class="card-header-row">
+            <span class="card-title">🛡️ Gut & Bloat Shield (Pachane Ka Rule)</span>
+          </div>
+          <div class="gut-tips">
+            <p>1. <strong>Dahi (Curd) in Lunch:</strong> Digestive enzymes & probiotics stimulate hunger naturally.</p>
+            <p>2. <strong>Water Rule:</strong> Khate waqt 1 sip se zyada paani mat piyo taaki stomach acid dilute na ho. Khane ke 45 min baad piyo.</p>
+            <p>3. <strong>5-Min Stroll:</strong> Bhari meal ke baad 5 minute tehelne se gas aur lethargy khatam ho jati hai.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- TAB 4: WORKOUT & REST TIMER -->
+      <!-- ============================================== -->
+      <section id="tab-workout" class="tab-pane">
+        <div class="pane-header">
+          <h2>🏋️ Week 1 Gym Tracker</h2>
+          <p>Phase 1 Foundation • Zero Cardio • Mind-Muscle Focus</p>
+        </div>
+
+        <!-- IN-GYM REST TIMER -->
+        <div class="timer-card glass-panel">
+          <div class="timer-display">
+            <span class="timer-label">REST TIMER</span>
+            <span id="timer-digits" class="timer-digits">01:15</span>
+          </div>
+          <div class="timer-actions">
+            <button class="btn-timer-preset" onclick="startTimer(60)">60s</button>
+            <button class="btn-timer-preset active-preset" onclick="startTimer(75)">75s</button>
+            <button class="btn-timer-preset" onclick="startTimer(90)">90s</button>
+            <button class="btn-timer-control" id="btn-timer-toggle" onclick="toggleTimer()">Start</button>
+            <button class="btn-timer-control btn-reset" onclick="resetTimer()">Reset</button>
+          </div>
+        </div>
+
+        <!-- WORKOUT LIST WITH DAY SWITCHER -->
+        <div class="workout-plan-box">
+          <div class="section-title-row">
+            <span class="section-title">Week 1 Foundation Split</span>
+            <span class="badge-mini">Akash Yaduvanshi PPL Priming</span>
+          </div>
+
+          <!-- DAY SELECTOR SCROLLER (6 DAYS LIFTING • SUNDAY ONLY REST) -->
+          <div class="day-selector-scroller">
+            <button class="day-pill" onclick="selectWorkoutDay(1)">Day 1 (Tue: A)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(2)">Day 2 (Wed: B)</button>
+            <button class="day-pill active-day" onclick="selectWorkoutDay(3)">Day 3 (TODAY: A)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(4)">Day 4 (Fri: B)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(5)">Day 5 (Sat: Pump)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(6)">Sunday (ONLY REST)</button>
+          </div>
+
+          <!-- DYNAMIC WORKOUT CONTENT -->
+          <div id="dynamic-workout-content">
+            <!-- Rendered by app.js -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- TAB 5: AKASH AI COACH CHAT -->
+      <!-- ============================================== -->
+      <section id="tab-chat" class="tab-pane">
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="coach-badge">
+              <div class="coach-avatar">AY</div>
+              <div>
+                <strong>Coach Akash AI</strong>
+                <small class="coach-status">Online • Bulking Mode Active</small>
+              </div>
+            </div>
+          </div>
+
+          <div id="chat-messages" class="chat-messages">
+            <div class="chat-bubble coach-msg">
+              Bhai Prateek! Shuruat mast ho gayi hai. 2 Kela pre-workout aur Palak Paneer rice lunch me log ho gaya hai. Abhi sham ko shake pelna hai bina fail. Koi bhi doubt ho, diet ya exercise ka, yahan direct pooch lo!
+            </div>
+          </div>
+
+          <div class="chat-input-bar">
+            <input type="text" id="chat-input" placeholder="Kuch bhi poocho Coach se..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+            <button class="btn-send" onclick="sendChatMessage()">➤</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- EMERGENCY RESCUE MODAL -->
+    <div id="rescue-modal" class="modal-overlay" style="display: none;" onclick="closeRescueModal(event)">
+      <div class="modal-content glass-panel" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h3>🚨 Emergency Calorie Rescue</h3>
+          <button class="btn-close" onclick="closeRescueModal()">&times;</button>
+        </div>
+        <div id="rescue-content" class="rescue-body">
+          <!-- Dynamically filled with instant high-calorie shake/snack combinations -->
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM TAB NAVIGATION -->
+    <nav class="bottom-nav">
+      <button class="nav-tab active" onclick="switchTab('dashboard')">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Dashboard</span>
+      </button>
+
+      <button class="nav-tab" onclick="switchTab('scanner')">
+        <span class="nav-icon">📸</span>
+        <span class="nav-label">Scanner</span>
+      </button>
+
+      <button class="nav-tab" onclick="switchTab('diet')">
+        <span class="nav-icon">🍲</span>
+        <span class="nav-label">Diet Hacks</span>
+      </button>
+
+      <button class="nav-tab" onclick="switchTab('workout')">
+        <span class="nav-icon">🏋️</span>
+        <span class="nav-label">Workout</span>
+      </button>
+
+      <button class="nav-tab" onclick="switchTab('chat')">
+        <span class="nav-icon">💬</span>
+        <span class="nav-label">Coach AI</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
