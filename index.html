@@ -1762,18 +1762,19 @@ h1, h2, h3, h4, .big-num, .card-title, .nav-label, .timer-digits {
         <!-- WORKOUT LIST WITH DAY SWITCHER -->
         <div class="workout-plan-box">
           <div class="section-title-row">
-            <span class="section-title">Week 1 Foundation Split</span>
-            <span class="badge-mini">Akash Yaduvanshi PPL Priming</span>
+            <span class="section-title">Week 2 Hypertrophy Split</span>
+            <span class="badge-mini">Akash Yaduvanshi PPL (Push-Pull-Legs)</span>
           </div>
 
           <!-- DAY SELECTOR SCROLLER (6 DAYS LIFTING • SUNDAY ONLY REST) -->
           <div class="day-selector-scroller">
-            <button class="day-pill" onclick="selectWorkoutDay(1)">Day 1 (Tue: A)</button>
-            <button class="day-pill" onclick="selectWorkoutDay(2)">Day 2 (Wed: B)</button>
-            <button class="day-pill active-day" onclick="selectWorkoutDay(3)">Day 3 (TODAY: A)</button>
-            <button class="day-pill" onclick="selectWorkoutDay(4)">Day 4 (Fri: B)</button>
-            <button class="day-pill" onclick="selectWorkoutDay(5)">Day 5 (Sat: Pump)</button>
-            <button class="day-pill" onclick="selectWorkoutDay(6)">Sunday (ONLY REST)</button>
+            <button class="day-pill active-day" onclick="selectWorkoutDay(1)">Day 1 (Mon: PUSH)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(2)">Day 2 (Tue: PULL)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(3)">Day 3 (Wed: LEGS)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(4)">Day 4 (Thu: PUSH)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(5)">Day 5 (Fri: PULL)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(6)">Day 6 (Sat: LEGS)</button>
+            <button class="day-pill" onclick="selectWorkoutDay(7)">Day 7 (Sun: REST)</button>
           </div>
 
           <!-- DYNAMIC WORKOUT CONTENT -->
@@ -1927,7 +1928,7 @@ function saveLocalState(state) {
 document.addEventListener("DOMContentLoaded", () => {
   fetchState();
   calculatePortion();
-  selectWorkoutDay(3); // Automatically load Day 3 (TODAY: Routine A Progression)
+  selectWorkoutDay(1); // Automatically load Day 1 (TODAY: Monday PUSH Hypertrophy)
 });
 
 // Sound Beep using Web Audio API (Zero external assets needed)
@@ -2514,87 +2515,101 @@ function escapeHtml(str) {
 }
 
 // ==========================================
-// 6-DAY LIFTING SPLIT (SUNDAY ONLY REST)
+// PPL HYPERTROPHY SPLIT (6 DAYS LIFTING • SUNDAY ONLY REST)
 // ==========================================
 const WEEK1_WORKOUTS = {
   1: {
-    dayName: "Day 1 (Tuesday): Full Body Priming - Routine A",
-    duration: "~45 Mins",
-    focus: "Chest / Lats / Quads / Hamstrings / Side Delts • RPE 6–7",
-    notes: "Bench 30° incline par set karo, shoulder blades retract karo aur mind-muscle feel karo.",
+    dayName: "Day 1 (Monday): PUSH 1 - Upper Chest Dominance & Shoulders",
+    duration: "~50 Mins",
+    focus: "Upper Clavicular Chest, Lateral Delts & Triceps • RPE 7-8",
+    notes: "Akash Yaduvanshi Upper Chest Rule: Incline angle se start karo. 3-second slow negative descent!",
     exercises: [
-      { name: "Incline DB Bench Press", group: "Upper Chest Focus", sets: 3, reps: "10–12", rest: 75, cue: "Bench 30° incline. Retract shoulder blades, pause 1s at bottom stretch." },
-      { name: "Lat Pulldown (Wide Grip)", group: "V-Taper Lat Width", sets: 3, reps: "10–12", rest: 75, cue: "Pull with elbows driving down, squeeze lats without backward swing." },
-      { name: "Leg Extension Machine", group: "Quad Activation", sets: 3, reps: "12–15", rest: 60, cue: "Control descent (2s down), hold peak squeeze for 1s at top." },
-      { name: "Lying Leg Curls", group: "Hamstrings", sets: 3, reps: "10–12", rest: 60, cue: "Keep hips pinned to pad. Do not jerk lower back." },
-      { name: "DB Lateral Raises", group: "Side Delts (Aesthetic Width)", sets: 4, reps: "12–15", rest: 60, cue: "Slight forward lean, raise in scapular plane, pour pinkies slightly." },
-      { name: "Standing Calf Raises", group: "Gastrocnemius", sets: 3, reps: "15", rest: 45, cue: "Full stretch at bottom, pause on toes for 2 seconds." },
-      { name: "Plank Hold", group: "Core Stabilization", sets: 3, reps: "40–50s", rest: 45, cue: "Glutes tight, belly button drawn in, neutral spine." }
+      { name: "Incline DB Bench Press (30°)", group: "Upper Clavicular Chest (Anchor Lift)", sets: 4, reps: "6–8", rest: 90, cue: "Bench 30° incline. Retract shoulder blades, 3s slow negative, explode up without clanking." },
+      { name: "Flat Dumbbell Press", group: "Sternal Mid Chest Mass", sets: 3, reps: "8–10", rest: 75, cue: "Elbows tucked at 45°. Feel deep chest stretch at bottom, press up in a smooth arch." },
+      { name: "Incline Cable / Machine Flyes", group: "Upper Chest Peak Squeeze", sets: 3, reps: "10–12", rest: 60, cue: "Slight elbow bend, hug a wide barrel, squeeze clavicular pecs for 1s at contraction." },
+      { name: "Seated DB Shoulder Press", group: "Anterior & Lateral Deltoids", sets: 3, reps: "8–10", rest: 75, cue: "Bench at 75-80°. Lower dumbbells to ear level with control, press up overhead." },
+      { name: "DB Lateral Raises (Akash V-Taper)", group: "Lateral Deltoids (Capped 3D Look)", sets: 4, reps: "12–15", rest: 60, cue: "Lean slightly forward, lead with elbows, raise to parallel. Strict form, ZERO hip swing." },
+      { name: "Lying EZ-Bar Skull Crushers", group: "Triceps Long Head", sets: 3, reps: "8–10", rest: 60, cue: "Lower the bar behind your crown for a deep triceps stretch, extend elbows smoothly." },
+      { name: "Tricep Rope Pushdowns", group: "Triceps Lateral Head", sets: 3, reps: "12–15", rest: 45, cue: "Keep elbows glued to ribs. Spread the rope outwards at the bottom and lock out." }
     ]
   },
   2: {
-    dayName: "Day 2 (Wednesday): Full Body Priming - Routine B",
-    duration: "~40–45 Mins",
-    focus: "Chest Thickness, Rows & Squat Pattern • RPE 6–7",
-    notes: "Flat press me elbows 45° angle par rakho. Seated row me navel ki taraf pull karo. Zero Cardio!",
+    dayName: "Day 2 (Tuesday): PULL 1 - V-Taper Lat Width & Biceps",
+    duration: "~50 Mins",
+    focus: "Lat Width, Mid-Back Thickness, Rear Delts & Biceps",
+    notes: "Pull with your elbows, not hands. Drive shoulder blades back and down for wide V-frame.",
     exercises: [
-      { name: "Flat Dumbbell Chest Press", group: "Mid Chest Mass", sets: 3, reps: "10–12", rest: 75, cue: "Elbows tucked at 45°. Feel chest stretch at bottom, smooth press." },
-      { name: "Seated Cable Row", group: "Mid-Back Thickness", sets: 3, reps: "10–12", rest: 75, cue: "Chest up, pull handle toward lower stomach, pinch shoulder blades." },
-      { name: "Goblet Squat (Dumbbell)", group: "Quad & Hip Priming", sets: 3, reps: "10–12", rest: 90, cue: "Shoulder-width stance, flat feet, push knees outward over toes." },
-      { name: "DB Overhead Shoulder Press", group: "Front/Side Deltoids", sets: 3, reps: "10–12", rest: 75, cue: "Seated on 75° bench, press up smoothly without locking elbows harshly." },
-      { name: "Standing DB Bicep Curls", group: "Biceps Brachii", sets: 3, reps: "10–12", rest: 60, cue: "Elbows locked at your sides, supinate wrist at top." },
-      { name: "Tricep Rope Pushdowns", group: "Triceps Lateral Head", sets: 3, reps: "12–15", rest: 60, cue: "Flare rope out at bottom, lock elbows, controlled return." },
-      { name: "Hanging Knee Raises", group: "Lower Abs", sets: 3, reps: "12–15", rest: 45, cue: "Roll pelvis up smoothly, don't swing using momentum." }
+      { name: "Lat Pulldown (Wide Grip)", group: "Latissimus Dorsi (V-Taper Width)", sets: 4, reps: "8–10", rest: 75, cue: "Arch upper chest up slightly, drive elbows down to hips, pause 1s at bottom, 3s negative." },
+      { name: "Seated Cable Row (Close V-Grip)", group: "Mid-Back & Rhomboid Thickness", sets: 3, reps: "8–10", rest: 75, cue: "Keep chest tall, pull handle to belly button, squeeze shoulder blades together." },
+      { name: "One-Arm Dumbbell Row", group: "Lower Lat & Outer Back", sets: 3, reps: "8–10", rest: 75, cue: "Pull dumbbell toward hip pocket like pulling a lawnmower cord. Don't rotate upper torso." },
+      { name: "Cable Face Pulls (with Rope)", group: "Rear Delts & Rotator Cuff Health", sets: 4, reps: "12–15", rest: 60, cue: "Set pulley at eye level. Pull rope to eyes, thumbs pointing back, spread hands apart." },
+      { name: "Standing DB / Barbell Bicep Curls", group: "Biceps Brachii", sets: 3, reps: "8–10", rest: 60, cue: "Keep elbows pinned at sides. Supinate wrists at top, resist 3s on the way down." },
+      { name: "Incline DB Hammer Curls", group: "Brachialis & Forearm Thickness", sets: 3, reps: "10–12", rest: 60, cue: "Bench at 60°. Neutral grip (palms facing each other). Builds upper arm width." }
     ]
   },
   3: {
-    dayName: "Day 3 (TODAY - Thursday): Routine A (Progression)",
-    duration: "~45 Mins",
-    focus: "Eccentric Control & Machine Progression • Zero Cardio",
-    notes: "Incline press me 3 second slow negative follow karo. Neutral lat pulldown try karo.",
+    dayName: "Day 3 (Wednesday): LEGS 1 - Quad Power & Lower Back",
+    duration: "~50 Mins",
+    focus: "Quad Mass, Hamstring Curl, Calves & Hyperextension",
+    notes: "Flat shoes, solid foot contact. Never lock knees violently at top of squats or leg press.",
     exercises: [
-      { name: "Incline DB Bench Press", group: "Upper Chest (3s Slow Negative)", sets: 3, reps: "10–12", rest: 75, cue: "Slow down the descent to 3s. Feel deep chest stretch." },
-      { name: "Lat Pulldown (Neutral/V-Grip)", group: "Lats & Terres Major", sets: 3, reps: "10–12", rest: 75, cue: "Neutral grip gives deeper stretch and protects biceps." },
-      { name: "Leg Press Machine", group: "Quads & Glutes", sets: 3, reps: "10–12", rest: 90, cue: "Feet shoulder-width on platform. Do NOT lock knees at top." },
-      { name: "Lying Leg Curls", group: "Hamstrings", sets: 3, reps: "10–12", rest: 60, cue: "Control tempo, hold at peak flexion." },
-      { name: "DB Lateral Raises", group: "Side Delts", sets: 4, reps: "12–15", rest: 60, cue: "Strict form. Lateral delts build the aesthetic Bollywood V-frame." },
-      { name: "Hyperextensions (Back Extension)", group: "Lower Back Erectors", sets: 3, reps: "12", rest: 60, cue: "Round slightly at bottom, straighten to neutral at top." },
-      { name: "Plank Hold", group: "Core", sets: 3, reps: "45s", rest: 45, cue: "Breathe through diaphragm while keeping abs tight." }
+      { name: "Barbell Back Squats (or Smith Squat)", group: "Quad Mass & Posterior Chain", sets: 4, reps: "6–8", rest: 90, cue: "Flat shoes, shoulder-width stance, brace core, break at hips and knees, hit parallel." },
+      { name: "Leg Press Machine", group: "Quad Hypertrophy & Glutes", sets: 3, reps: "10–12", rest: 75, cue: "Feet mid-platform. Deep descent without lifting lower back from pad. Never lock knees!" },
+      { name: "Leg Extension Machine", group: "Rectus Femoris Isolation", sets: 3, reps: "12–15", rest: 60, cue: "Squeeze quads hard at the top for 1 full second, 2-second slow lowering." },
+      { name: "Lying Hamstring Leg Curls", group: "Hamstring Peak Flexion", sets: 4, reps: "8–10", rest: 60, cue: "Keep hips glued to pad. Curl up smoothly, control the negative without jerking." },
+      { name: "Standing Calf Raises", group: "Gastrocnemius (Calves)", sets: 4, reps: "12–15", rest: 45, cue: "Full deep stretch at bottom for 1s, push high on big toes and hold 2s at peak." },
+      { name: "Hyperextensions (Back Extension)", group: "Spinal Erectors & Glute Tie-in", sets: 3, reps: "12–15", rest: 60, cue: "Pad below hip crease. Round upper back slightly going down, pull up to neutral spine." }
     ]
   },
   4: {
-    dayName: "Day 4 (Friday): Routine B (Progression)",
-    duration: "~45 Mins",
-    focus: "Isolation & Mind-Muscle Connection",
-    notes: "Incline machine press me seat height clavicle line par rakho. Face pulls for round rear delts.",
+    dayName: "Day 4 (Thursday): PUSH 2 - Chest Clavicle & Lateral Width",
+    duration: "~50 Mins",
+    focus: "Incline Barbell, Dips, Capped Delts & Triceps",
+    notes: "Upper chest heavy progressive overload. Lateral raises volume for boulder shoulders.",
     exercises: [
-      { name: "Incline Machine Chest Press", group: "Upper Chest Isolation", sets: 3, reps: "10–12", rest: 75, cue: "Handles align with upper clavicular chest line." },
-      { name: "One-Arm Dumbbell Row", group: "Lat & Lower Trap", sets: 3, reps: "10–12", rest: 75, cue: "Pull elbow back toward hip pocket, avoid rotating torso." },
-      { name: "Leg Extension Machine", group: "Quads", sets: 3, reps: "12–15", rest: 60, cue: "Full squeeze at top, smooth slow lowering." },
-      { name: "Cable Face Pulls", group: "Rear Delts & Posture", sets: 3, reps: "12–15", rest: 60, cue: "Rope to eye level, pull apart hands, thumbs pointing back." },
-      { name: "Incline DB Hammer Curls", group: "Brachialis & Forearms", sets: 3, reps: "10–12", rest: 60, cue: "Palms facing inward. Builds upper arm thickness." },
-      { name: "Overhead DB Tricep Extension", group: "Triceps Long Head", sets: 3, reps: "10–12", rest: 60, cue: "Deep stretch behind neck, smooth press to lockout." },
-      { name: "Standing Calf Raises", group: "Calves", sets: 3, reps: "15", rest: 45, cue: "Hold 2s full contraction on every single rep." }
+      { name: "Incline Barbell Bench Press", group: "Upper Chest Heavy Tension", sets: 4, reps: "6–8", rest: 90, cue: "Grip slightly wider than shoulder width. Lower bar to upper chest clavicle line, press explosive." },
+      { name: "Chest Dips (or Incline Machine)", group: "Lower/Outer Chest & Triceps", sets: 3, reps: "8–10", rest: 75, cue: "Lean torso 30° forward, elbows flared slightly outward to target chest over triceps." },
+      { name: "Flat DB Flyes / Cable Crossover", group: "Chest Stretch Hypertrophy", sets: 3, reps: "10–12", rest: 60, cue: "Soft elbow bend. Lower until you feel deep pec stretch, bring dumbbells together at top." },
+      { name: "DB Arnold Shoulder Press", group: "Full Deltoid Rotation", sets: 3, reps: "8–10", rest: 75, cue: "Start palms facing chest, rotate outwards as you press overhead, smooth reversal." },
+      { name: "Cable Lateral Raises", group: "Lateral Deltoids (Constant Tension)", sets: 4, reps: "12–15", rest: 60, cue: "Cables give continuous tension at the bottom. Keep arms long, raise to shoulder height." },
+      { name: "Overhead DB Tricep Extension", group: "Triceps Long Head", sets: 3, reps: "10–12", rest: 60, cue: "Seated, hold one dumbbell with both hands overhead. Deep stretch behind neck." },
+      { name: "Straight Bar Cable Pushdowns", group: "Triceps Medial & Lateral Heads", sets: 3, reps: "12–15", rest: 45, cue: "Pin elbows at sides. Press down and squeeze hard for 1 second at full lockout." }
     ]
   },
   5: {
-    dayName: "Day 5 (Saturday): Aesthetic Pump & Weak Points",
-    duration: "~35 Mins",
-    focus: "High Blood Flow Hypertrophy • Zero Cardio",
-    notes: "Incline flyes, lateral delts, biceps, triceps aur core. Save all calories for growth!",
+    dayName: "Day 5 (Friday): PULL 2 - Mid-Back Thickness & Bicep Peak",
+    duration: "~50 Mins",
+    focus: "T-Bar Rows, Lower Lats, Rear Delts & Arms",
+    notes: "Chest-supported row builds dense Bollywood back thickness. Full bicep stretch on preacher.",
     exercises: [
-      { name: "Incline Dumbbell Flyes", group: "Chest Stretch & Squeeze", sets: 3, reps: "12", rest: 60, cue: "Hug a wide tree, feel deep chest stretch." },
-      { name: "Cable Lateral Raises", group: "Capped Side Delts", sets: 4, reps: "15", rest: 60, cue: "Constant cable tension for round deltoids." },
-      { name: "Cable Bicep Curls", group: "Bicep Peak", sets: 3, reps: "12", rest: 60, cue: "Squeeze biceps at the top for 1 full second." },
-      { name: "Tricep Pushdowns", group: "Tricep Pump", sets: 3, reps: "15", rest: 60, cue: "Lock elbows, push straight down." },
-      { name: "Hanging Leg Raises", group: "Lower Abs", sets: 3, reps: "15", rest: 45, cue: "Strict form, avoid swinging." }
+      { name: "Chest-Supported T-Bar / Barbell Row", group: "Dense Mid-Back & Rhomboids", sets: 4, reps: "6–8", rest: 90, cue: "Chest pinned to support pad. Pull elbows back, squeeze mid-back with zero momentum." },
+      { name: "Lat Pulldown (Neutral or Reverse Grip)", group: "Lower Lats & Bicep Assist", sets: 3, reps: "8–10", rest: 75, cue: "Underhand/V-grip allows full elbow tuck and hits the lower insertion of the lats." },
+      { name: "Straight-Arm Cable Lat Pullover", group: "Isolated Lat Contraction", sets: 3, reps: "12–15", rest: 60, cue: "Slight forward torso lean, arms straight with slight bend. Drive bar down to thighs using lats." },
+      { name: "Reverse Pec Deck Machine (Rear Delt Flyes)", group: "Rear Deltoid Mass", sets: 4, reps: "12–15", rest: 60, cue: "Chest flat against pad. Keep arms parallel to floor, push elbows back wide." },
+      { name: "Preacher Curls (EZ-Bar or Machine)", group: "Bicep Short Head (Peak Isolation)", sets: 3, reps: "8–10", rest: 60, cue: "Arms flat on preacher pad. Eliminates body swing completely for pure bicep recruitment." },
+      { name: "Cable Rope Hammer Curls", group: "Brachialis & Forearm Thickness", sets: 3, reps: "12–15", rest: 60, cue: "Palms facing together throughout. Squeeze hard at the top to build arm thickness." }
     ]
   },
   6: {
-    dayName: "Sunday: ONLY REST DAY & Weekly Weigh-In",
+    dayName: "Day 6 (Saturday): LEGS 2 & Core Overload",
+    duration: "~50 Mins",
+    focus: "Romanian Deadlifts, Hamstring Stretch, Calves & Abs",
+    notes: "RDL me hips peeche bhejo, knees soft rakho. Sunday full rest ke liye energy channel karo!",
+    exercises: [
+      { name: "Romanian Deadlifts (DB or Barbell)", group: "Hamstring & Glute Stretch", sets: 4, reps: "8–10", rest: 90, cue: "Soft knees, push hips far back to wall behind you, flat neutral spine, feel deep hamstring stretch." },
+      { name: "Leg Press (Feet High & Wide)", group: "Hamstrings, Glutes & Adductors", sets: 3, reps: "10–12", rest: 75, cue: "High foot placement shifts mechanical load directly to hamstrings and glutes." },
+      { name: "Walking DB Lunges", group: "Quad & Glute Unilateral Mass", sets: 3, reps: "10 / leg", rest: 75, cue: "Take controlled strides, back knee kisses floor lightly, chest upright." },
+      { name: "Leg Extension Machine", group: "Quad Burnout Hypertrophy", sets: 3, reps: "12–15", rest: 60, cue: "3-second slow lowering on every rep to completely fatigue quad muscle fibers." },
+      { name: "Seated Calf Raises", group: "Soleus (Deep Calf Thickness)", sets: 4, reps: "15–20", rest: 45, cue: "Knees bent at 90° targets the soleus muscle underneath the calf." },
+      { name: "Hanging Leg / Knee Raises", group: "Lower Abdominals", sets: 3, reps: "12–15", rest: 45, cue: "Curl pelvis upward towards chest. Avoid swinging your legs like a pendulum." },
+      { name: "Plank Hold", group: "Core Transverse Abdominis", sets: 3, reps: "45–60s", rest: 45, cue: "Brace abs as if someone is about to punch your stomach, neutral spine." }
+    ]
+  },
+  7: {
+    dayName: "Day 7 (Sunday): ONLY REST DAY & Weekly Weigh-In",
     duration: "Full Rest",
-    focus: "Sunday Morning Empty Stomach Weigh-in",
-    notes: "Full recovery day! Weigh yourself first thing in the morning empty stomach after bathroom. Log your weight. Eat 2,600 clean calories to prepare for Week 2 heavy lifting!",
+    focus: "Sunday Morning Empty Stomach Weigh-in • Zero Cardio",
+    notes: "Full recovery day! Weigh yourself first thing in the morning empty stomach after bathroom. Log your weight. Eat 2,600 clean calories to grow muscle tissue during rest!",
     isRest: true
   }
 };
